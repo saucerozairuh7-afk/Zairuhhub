@@ -1,0 +1,162 @@
+        local tx = Instance.new("TextLabel"); tx.Size = UDim2.new(1,-32,1,0); tx.Position = UDim2.new(0,28,0,0); tx.BackgroundTransparency = 1; tx.Text = f[2]; tx.TextColor3 = Color3.fromRGB(220,220,235); tx.TextSize = 12; tx.Font = Enum.Font.Gotham; tx.TextXAlignment = Enum.TextXAlignment.Left; tx.Parent = row
+    end
+    local barBG = Instance.new("Frame"); barBG.Size = UDim2.new(1,-40,0,10); barBG.Position = UDim2.new(0,20,0,382); barBG.BackgroundColor3 = Color3.fromRGB(30,30,45); barBG.BorderSizePixel = 0; barBG.Parent = lMain
+    local bc = Instance.new("UICorner"); bc.CornerRadius = UDim.new(1,0); bc.Parent = barBG
+    local barFill = Instance.new("Frame"); barFill.Size = UDim2.new(0,0,1,0); barFill.BackgroundColor3 = Color3.fromRGB(255,255,255); barFill.BorderSizePixel = 0; barFill.Parent = barBG
+    local fc = Instance.new("UICorner"); fc.CornerRadius = UDim.new(1,0); fc.Parent = barFill
+    local bg = Instance.new("UIGradient"); bg.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255,140,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,255,255))}; bg.Parent = barFill
+    local pct = Instance.new("TextLabel"); pct.Size = UDim2.new(1,-40,0,16); pct.Position = UDim2.new(0,20,0,396); pct.BackgroundTransparency = 1; pct.Text = "VIP Verified, Goat..."; pct.TextColor3 = Color3.fromRGB(150,150,170); pct.TextSize = 10; pct.Font = Enum.Font.Gotham; pct.TextXAlignment = Enum.TextXAlignment.Left; pct.Parent = lMain
+    local loadBtn = Instance.new("TextButton"); loadBtn.Size = UDim2.new(1,-40,0,52); loadBtn.Position = UDim2.new(0,20,0,420); loadBtn.BackgroundColor3 = Color3.fromRGB(255,215,0); loadBtn.Text = "🐐  LOAD - ZAIRUH THE GOAT"; loadBtn.TextColor3 = Color3.fromRGB(0,0,0); loadBtn.TextSize = 15; loadBtn.Font = Enum.Font.GothamBlack; loadBtn.AutoButtonColor = false; loadBtn.Parent = lMain
+    local lcb = Instance.new("UICorner"); lcb.CornerRadius = UDim.new(0,14); lcb.Parent = loadBtn
+    local lg = Instance.new("UIGradient"); lg.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,140,0))}; lg.Rotation = 90; lg.Parent = loadBtn
+    local foot = Instance.new("TextLabel"); foot.Size = UDim2.new(1,-40,0,16); foot.Position = UDim2.new(0,20,0,480); foot.BackgroundTransparency = 1; foot.Text = "ZAIRUH THE GOAT  •  VIP  •  v2.0  •  🐐"; foot.TextColor3 = Color3.fromRGB(100,100,120); foot.TextSize = 9; foot.Font = Enum.Font.Gotham; foot.Parent = lMain
+    lMain.Size = UDim2.new(0,400,0,0); lMain.Position = UDim2.new(0.5,-200,0.5,0)
+    TweenService:Create(lMain, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0,400,0,500), Position = UDim2.new(0.5,-200,0.5,-250)}):Play()
+
+    local function OpenSpawner()
+        local unpack = table.unpack or unpack
+        local UNITS = {"TitanClockman","TitanDrillman","TitanSpeakerman","UpgradedCinemaman","Gmanv3","Gmanv2","Gmanv1","GmanBlaster","GmanBuzzsaw","GmanPlane","LargeScientist","Scientist","JetpackPolice","Police","Clockman","RocketLauncher","SecretAgent","Large","Helicopter","TNT","Mutant","Glitch","Jetpack","Spider","Hook","Vacuum","Ufo","Rocket","Triple","Buzzsaw","Katana","GunStrider","Snowman","Turkey","SantaTvman"}
+        local TITANS = {"TitanClockman","TitanDrillman","TitanSpeakerman","UpgradedCinemaman","Gmanv3","GmanBlaster"}
+        local CHEAP = {"Police","Scientist","Clockman","Jetpack","Large","Helicopter"}
+        local selected = UNITS[1]
+        local cycleT, cycleC, cycleA = 0,0,0
+        local MODES = {
+            { name = "Selected", get = function() return selected end },
+            { name = "Titans", get = function() cycleT = cycleT % #TITANS + 1 return TITANS[cycleT] end },
+            { name = "Cheap", get = function() cycleC = cycleC % #CHEAP + 1 return CHEAP[cycleC] end },
+            { name = "Random", get = function() return UNITS[math.random(#UNITS)] end },
+            { name = "All Cycle", get = function() cycleA = cycleA % #UNITS + 1 return UNITS[cycleA] end },
+        }
+        local modeIdx = 1; local autoOn = false; local safeMode = true; local spawnedCount = 0; local MAX_SPAWN = 40
+        local capturedRemote = nil; local capturedIsFunction = true; local capturedArgs = {}; local posArgIndex = nil; local unitArgIndex = nil; local listening = false
+        local sGui = Instance.new("ScreenGui"); sGui.Name = "Zairuh_Spawner"; sGui.ResetOnSpawn = false; sGui.Parent = playerGui
+        local frame = Instance.new("Frame"); frame.Size = UDim2.new(0,230,0,470); frame.Position = UDim2.new(0,20,0.5,-235); frame.BackgroundColor3 = Color3.fromRGB(12,12,18); frame.Active = true; frame.Draggable = true; frame.BorderSizePixel = 0; frame.Parent = sGui
+        local fC = Instance.new("UICorner"); fC.CornerRadius = UDim.new(0,16); fC.Parent = frame
+        local fS = Instance.new("UIStroke"); fS.Thickness = 1.5; fS.Color = Color3.fromRGB(255,215,0); fS.Parent = frame
+        local titleBar = Instance.new("Frame"); titleBar.Size = UDim2.new(1,0,0,38); titleBar.BackgroundColor3 = Color3.fromRGB(255,215,0); titleBar.BorderSizePixel = 0; titleBar.Parent = frame
+        local tc = Instance.new("UICorner"); tc.CornerRadius = UDim.new(0,16); tc.Parent = titleBar
+        local titleLbl = Instance.new("TextLabel"); titleLbl.Size = UDim2.new(1,-36,1,0); titleLbl.Position = UDim2.new(0,10,0,0); titleLbl.BackgroundTransparency = 1; titleLbl.Text = "🐐 ZAIRUH THE GOAT [VIP]"; titleLbl.TextColor3 = Color3.fromRGB(0,0,0); titleLbl.TextSize = 13; titleLbl.Font = Enum.Font.GothamBlack; titleLbl.TextXAlignment = Enum.TextXAlignment.Left; titleLbl.Parent = titleBar
+        local close2 = Instance.new("TextButton"); close2.Size = UDim2.new(0,28,0,28); close2.Position = UDim2.new(1,-32,0,5); close2.BackgroundColor3 = Color3.fromRGB(20,20,20); close2.Text = "X"; close2.TextColor3 = Color3.new(1,1,1); close2.Font = Enum.Font.GothamBold; close2.Parent = frame
+        local cc2 = Instance.new("UICorner"); cc2.CornerRadius = UDim.new(1,0); cc2.Parent = close2
+        close2.MouseButton1Click:Connect(function() sGui:Destroy() end)
+        local status = Instance.new("TextLabel"); status.Size = UDim2.new(1,-10,0,42); status.Position = UDim2.new(0,5,0,44); status.BackgroundColor3 = Color3.fromRGB(30,30,40); status.Text = "1. Click CAPTURE\n2. Place 1 unit manually"; status.TextColor3 = Color3.new(1,1,1); status.TextSize = 11; status.Font = Enum.Font.Gotham; status.TextWrapped = true; status.Parent = frame
+        local sc = Instance.new("UICorner"); sc.CornerRadius = UDim.new(0,10); sc.Parent = status
+        local selectedLbl = Instance.new("TextLabel"); selectedLbl.Size = UDim2.new(1,-10,0,22); selectedLbl.Position = UDim2.new(0,5,0,92); selectedLbl.BackgroundTransparency = 1; selectedLbl.Text = "Selected: TitanClockman"; selectedLbl.TextColor3 = Color3.fromRGB(255,215,0); selectedLbl.TextSize = 11; selectedLbl.Font = Enum.Font.GothamBold; selectedLbl.TextXAlignment = Enum.TextXAlignment.Left; selectedLbl.Parent = frame
+        local scroll = Instance.new("ScrollingFrame"); scroll.Size = UDim2.new(1,-10,0,210); scroll.Position = UDim2.new(0,5,0,118); scroll.BackgroundTransparency = 1; scroll.CanvasSize = UDim2.new(0,0,0,#UNITS*26); scroll.ScrollBarThickness = 4; scroll.Parent = frame
+        local btns = {}
+        for i, u in ipairs(UNITS) do
+            local b = Instance.new("TextButton"); b.Size = UDim2.new(1,-5,0,23); b.Position = UDim2.new(0,0,0,(i-1)*26); b.BackgroundColor3 = (i==1) and Color3.fromRGB(255,215,0) or Color3.fromRGB(35,35,48); b.Text = u; b.TextColor3 = (i==1) and Color3.fromRGB(0,0,0) or Color3.new(1,1,1); b.TextSize = 11; b.Font = Enum.Font.Gotham; b.Parent = scroll
+            local bcc = Instance.new("UICorner"); bcc.CornerRadius = UDim.new(0,6); bcc.Parent = b
+            b.MouseButton1Click:Connect(function() selected = u; selectedLbl.Text = "Selected: " .. u; for _, x in ipairs(btns) do x.BackgroundColor3 = Color3.fromRGB(35,35,48); x.TextColor3 = Color3.new(1,1,1) end; b.BackgroundColor3 = Color3.fromRGB(255,215,0); b.TextColor3 = Color3.fromRGB(0,0,0) end)
+            table.insert(btns, b)
+        end
+        local function makeBtn(text, y, color, tc2)
+            local btn = Instance.new("TextButton"); btn.Size = UDim2.new(1,-10,0,30); btn.Position = UDim2.new(0,5,0,y); btn.BackgroundColor3 = color; btn.Text = text; btn.TextColor3 = tc2 or Color3.new(1,1,1); btn.TextSize = 12; btn.Font = Enum.Font.GothamBold; btn.Parent = frame
+            local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,10); c.Parent = btn; return btn
+        end
+        local captureBtn = makeBtn("🎯  CAPTURE: Place 1 Unit", 336, Color3.fromRGB(255,140,0), Color3.fromRGB(0,0,0))
+        local safeBtn = makeBtn("🛡️  Safe Mode: ON", 368, Color3.fromRGB(20,120,60)); safeBtn.Size = UDim2.new(1,-10,0,26)
+        local modeBtn = makeBtn("👑  Mode: Selected", 398, Color3.fromRGB(130,80,255)); modeBtn.Size = UDim2.new(1,-10,0,28)
+        local autoBtn = makeBtn("🐐  Auto Spawn: OFF", 430, Color3.fromRGB(180,40,40)); autoBtn.Size = UDim2.new(1,-10,0,34)
+        safeBtn.MouseButton1Click:Connect(function() safeMode = not safeMode; safeBtn.Text = safeMode and "🛡️  Safe Mode: ON" or "🛡️  Safe Mode: OFF"; safeBtn.BackgroundColor3 = safeMode and Color3.fromRGB(20,120,60) or Color3.fromRGB(180,80,30) end)
+        modeBtn.MouseButton1Click:Connect(function() modeIdx = modeIdx % #MODES + 1; modeBtn.Text = "👑  Mode: " .. MODES[modeIdx].name end)
+        autoBtn.MouseButton1Click:Connect(function() autoOn = not autoOn; autoBtn.Text = autoOn and "🐐  Auto Spawn: ON" or "🐐  Auto Spawn: OFF"; autoBtn.BackgroundColor3 = autoOn and Color3.fromRGB(20,150,60) or Color3.fromRGB(180,40,40); if autoOn then spawnedCount = 0 end; if autoOn and not capturedRemote then status.Text = "⚠️ Capture first! Click CAPTURE then place 1 unit"; status.BackgroundColor3 = Color3.fromRGB(150,50,50) end end)
+        local function getSpawnPos() local char = player.Character; if char and char:FindFirstChild("HumanoidRootPart") then return char.HumanoidRootPart.Position end; return Vector3.new(0,5,0) end
+        local oldNamecall; local hookOk = pcall(function()
+            oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+                local method = getnamecallmethod()
+                if listening and not capturedRemote and (method == "InvokeServer" or method == "FireServer") then
+                    capturedRemote = self; capturedIsFunction = (method == "InvokeServer"); capturedArgs = {...}; posArgIndex = nil; unitArgIndex = nil
+                    for i, a in ipairs(capturedArgs) do
+                        if typeof(a) == "CFrame" or typeof(a) == "Vector3" then if not posArgIndex then posArgIndex = i end
+                        elseif typeof(a) == "string" then for _, uName in ipairs(UNITS) do if a == uName then unitArgIndex = i break end end end
+                    end
+                    listening = false; status.Text = "✅ CAPTURED: " .. self.Name .. " | pos:" .. tostring(posArgIndex) .. " unit:" .. tostring(unitArgIndex) .. " - Ready!"; status.BackgroundColor3 = Color3.fromRGB(20,120,60); captureBtn.Text = "🔄  Re-Capture Remote"
+                end
+                return oldNamecall(self, ...)
+            end)
+        end)
+        if not hookOk then status.Text = "❌ Executor lacks hookmetamethod"; status.BackgroundColor3 = Color3.fromRGB(150,50,50) end
+        captureBtn.MouseButton1Click:Connect(function() if not hookOk then return end; capturedRemote = nil; capturedArgs = {}; posArgIndex = nil; unitArgIndex = nil; listening = true; status.Text = "👂 Listening... Place ONE unit now!"; status.BackgroundColor3 = Color3.fromRGB(180,140,30); captureBtn.Text = "👂 Listening... place 1 unit" end)
+        task.spawn(function()
+            while true do
+                if safeMode then task.wait(1.5 + math.random()*1.5) else task.wait(0.7) end
+                if autoOn and capturedRemote and spawnedCount < MAX_SPAWN then
+                    local args = {}; for i, a in ipairs(capturedArgs) do args[i] = a end
+                    local newUnit = MODES[modeIdx].get(); if unitArgIndex then args[unitArgIndex] = newUnit end
+                    if posArgIndex then local base = getSpawnPos(); local offset = Vector3.new(math.random(-4,4), 0, math.random(-4,4)); local finalPos = base + offset; if typeof(capturedArgs[posArgIndex]) == "CFrame" then args[posArgIndex] = CFrame.new(finalPos) else args[posArgIndex] = finalPos end end
+                    local ok, err = pcall(function() if capturedIsFunction then capturedRemote:InvokeServer(unpack(args)) else capturedRemote:FireServer(unpack(args)) end end)
+                    if ok then spawnedCount = spawnedCount + 1; status.Text = "🐐 Spawned: " .. newUnit .. " (" .. spawnedCount .. "/" .. MAX_SPAWN .. ")"; status.BackgroundColor3 = Color3.fromRGB(20,120,60)
+                    else status.Text = "❌ Spawn failed: " .. tostring(err) end
+                    if spawnedCount >= MAX_SPAWN then status.Text = "🏁 Cap (" .. MAX_SPAWN .. ") reached" end
+                end
+            end
+        end)
+        print("[ZAIRUH THE GOAT VIP] Spawner loaded!")
+    end
+
+    local loading = false
+    loadBtn.MouseButton1Click:Connect(function()
+        if loading then return end; loading = true; loadBtn.Text = "LOADING GOAT..."
+        for i = 1, 100 do TweenService:Create(barFill, TweenInfo.new(0.05), {Size = UDim2.new(i/100, 0, 1, 0)}):Play(); pct.Text = "Loading... " .. i .. "%"; if i == 70 then pct.Text = "Injecting GOAT Features..." end; task.wait(0.015) end
+        loadBtn.Text = "✓  LOADED - GOAT MODE!"; task.wait(0.4)
+        TweenService:Create(lMain, TweenInfo.new(0.35), {BackgroundTransparency = 1}):Play(); TweenService:Create(dim2, TweenInfo.new(0.35), {BackgroundTransparency = 1}):Play(); task.wait(0.35); gui:Destroy(); OpenSpawner()
+    end)
+end
+
+-- KEY CHECK
+local function TryLogin()
+    local entered = keyBox.Text:gsub("%s+", "")
+    if entered == "" then statusLbl.Text = "❌ Please enter a key first!"; statusLbl.TextColor3 = Color3.fromRGB(255,80,80); return end
+    local data = VIP_KEYS[entered]
+    local role = data and data.tier or nil
+    if role then
+        -- Check expiry
+        if data.expires and os.time() > data.expires then
+            statusLbl.Text = "❌ Key Expired! This " .. role .. " key expired on " .. data.date
+            statusLbl.TextColor3 = Color3.fromRGB(255,80,80)
+            return
+        end
+        local expText = data.date == "Never" and "Lifetime ♾️" or ("Expires: " .. data.date)
+        statusLbl.Text = "✅ VIP Verified! " .. role .. " | " .. expText .. " 🐐"
+        statusLbl.TextColor3 = Color3.fromRGB(80,255,140)
+        loginBtn.Text = "✅  VERIFIED - LOADING..."
+        task.wait(0.6)
+        OpenLoader()
+    else
+        statusLbl.Text = "❌ Invalid Key! Ask Zairuh for VIP"
+        statusLbl.TextColor3 = Color3.fromRGB(255,80,80)
+        TweenService:Create(main, TweenInfo.new(0.1), {Position = UDim2.new(0.5, -180, 0.5, -220)}):Play(); task.wait(0.1)
+        TweenService:Create(main, TweenInfo.new(0.1), {Position = UDim2.new(0.5, -200, 0.5, -220)}):Play(); task.wait(0.1)
+        TweenService:Create(main, TweenInfo.new(0.1), {Position = UDim2.new(0.5, -190, 0.5, -220)}):Play()
+    end
+end
+loginBtn.MouseButton1Click:Connect(TryLogin)
+keyBox.FocusLost:Connect(function(enter) if enter then TryLogin() end end)
+
+end)
+if not ok then
+    warn("[ZAIRUH ERROR]: " .. tostring(err))
+    -- Show error on screen
+    local Players = game:GetService("Players")
+    local p = Players.LocalPlayer
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "Zairuh_ERROR"
+    gui.ResetOnSpawn = false
+    gui.Parent = p:WaitForChild("PlayerGui")
+    local f = Instance.new("Frame")
+    f.Size = UDim2.new(0,400,0,200)
+    f.Position = UDim2.new(0.5,-200,0.5,-100)
+    f.BackgroundColor3 = Color3.fromRGB(180,30,30)
+    f.Parent = gui
+    local l = Instance.new("TextLabel")
+    l.Size = UDim2.new(1,-20,1,-20)
+    l.Position = UDim2.new(0,10,0,10)
+    l.BackgroundTransparency = 1
+    l.Text = "ZAIRUH ERROR:\n" .. tostring(err) .. "\n\nScreenshot this and send to Zairuh"
+    l.TextColor3 = Color3.new(1,1,1)
+    l.TextSize = 13
+    l.TextWrapped = true
+    l.Font = Enum.Font.Gotham
+    l.Parent = f
+end
