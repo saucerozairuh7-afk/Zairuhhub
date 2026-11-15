@@ -1,0 +1,183 @@
+-- ZAIRUH THE GOAT - FIXED v3 | Error popup if something fails
+local ok, err = pcall(function()
+-- ZAIRUH THE GOAT | VIP KEY SYSTEM + LOADER + SPAWNER
+-- Keys below are the VIP keys - share only with people you trust!
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- ================= VIP KEYS =================
+-- Give these to your VIPs. Change them if you want!
+-- ================= VIP KEYS - 5x PER DURATION =================
+-- Generated: 2026-11-15 | Total 50 Keys | 5x per tier
+-- 1 Day, 5 Days, 7 Days, 10 Days, 30 Days, 1 Month, 5 Month, 7 Month, 1 Year, Lifetime
+local VIP_KEYS = {
+    ["ZAIRUH-1DAY-1FZ8M"] = { tier = "1 Day", expires = 1794895200, date = "2026-11-16" }, -- 1 Day
+    ["ZAIRUH-1DAY-L0JA4"] = { tier = "1 Day", expires = 1794895200, date = "2026-11-16" }, -- 1 Day
+    ["ZAIRUH-1DAY-UHFHW"] = { tier = "1 Day", expires = 1794895200, date = "2026-11-16" }, -- 1 Day
+    ["ZAIRUH-1DAY-KZSBV"] = { tier = "1 Day", expires = 1794895200, date = "2026-11-16" }, -- 1 Day
+    ["ZAIRUH-1DAY-IBP9I"] = { tier = "1 Day", expires = 1794895200, date = "2026-11-16" }, -- 1 Day
+    ["ZAIRUH-5DAY-LGJFZ"] = { tier = "5 Days", expires = 1795240800, date = "2026-11-20" }, -- 5 Days
+    ["ZAIRUH-5DAY-RBBA7"] = { tier = "5 Days", expires = 1795240800, date = "2026-11-20" }, -- 5 Days
+    ["ZAIRUH-5DAY-GAPOH"] = { tier = "5 Days", expires = 1795240800, date = "2026-11-20" }, -- 5 Days
+    ["ZAIRUH-5DAY-F706K"] = { tier = "5 Days", expires = 1795240800, date = "2026-11-20" }, -- 5 Days
+    ["ZAIRUH-5DAY-ON9KR"] = { tier = "5 Days", expires = 1795240800, date = "2026-11-20" }, -- 5 Days
+    ["ZAIRUH-7DAY-P37LV"] = { tier = "7 Days", expires = 1795413600, date = "2026-11-22" }, -- 7 Days
+    ["ZAIRUH-7DAY-SJZA5"] = { tier = "7 Days", expires = 1795413600, date = "2026-11-22" }, -- 7 Days
+    ["ZAIRUH-7DAY-ZEKWO"] = { tier = "7 Days", expires = 1795413600, date = "2026-11-22" }, -- 7 Days
+    ["ZAIRUH-7DAY-BDH7P"] = { tier = "7 Days", expires = 1795413600, date = "2026-11-22" }, -- 7 Days
+    ["ZAIRUH-7DAY-EB727"] = { tier = "7 Days", expires = 1795413600, date = "2026-11-22" }, -- 7 Days
+    ["ZAIRUH-10DAY-SMMDF"] = { tier = "10 Days", expires = 1795672800, date = "2026-11-25" }, -- 10 Days
+    ["ZAIRUH-10DAY-BLQ6B"] = { tier = "10 Days", expires = 1795672800, date = "2026-11-25" }, -- 10 Days
+    ["ZAIRUH-10DAY-AZNSZ"] = { tier = "10 Days", expires = 1795672800, date = "2026-11-25" }, -- 10 Days
+    ["ZAIRUH-10DAY-0JFLJ"] = { tier = "10 Days", expires = 1795672800, date = "2026-11-25" }, -- 10 Days
+    ["ZAIRUH-10DAY-28NKK"] = { tier = "10 Days", expires = 1795672800, date = "2026-11-25" }, -- 10 Days
+    ["ZAIRUH-30DAY-30YB9"] = { tier = "30 Days", expires = 1797400800, date = "2026-12-15" }, -- 30 Days
+    ["ZAIRUH-30DAY-8RKTH"] = { tier = "30 Days", expires = 1797400800, date = "2026-12-15" }, -- 30 Days
+    ["ZAIRUH-30DAY-7BUSB"] = { tier = "30 Days", expires = 1797400800, date = "2026-12-15" }, -- 30 Days
+    ["ZAIRUH-30DAY-FVZFJ"] = { tier = "30 Days", expires = 1797400800, date = "2026-12-15" }, -- 30 Days
+    ["ZAIRUH-30DAY-FE8JN"] = { tier = "30 Days", expires = 1797400800, date = "2026-12-15" }, -- 30 Days
+    ["ZAIRUH-1MONTH-T5WTE"] = { tier = "1 Month", expires = 1797400800, date = "2026-12-15" }, -- 1 Month
+    ["ZAIRUH-1MONTH-YELY9"] = { tier = "1 Month", expires = 1797400800, date = "2026-12-15" }, -- 1 Month
+    ["ZAIRUH-1MONTH-KPQWT"] = { tier = "1 Month", expires = 1797400800, date = "2026-12-15" }, -- 1 Month
+    ["ZAIRUH-1MONTH-YE5OQ"] = { tier = "1 Month", expires = 1797400800, date = "2026-12-15" }, -- 1 Month
+    ["ZAIRUH-1MONTH-KBJDH"] = { tier = "1 Month", expires = 1797400800, date = "2026-12-15" }, -- 1 Month
+    ["ZAIRUH-5MONTH-OK9P5"] = { tier = "5 Months", expires = 1807765200, date = "2027-04-14" }, -- 5 Months
+    ["ZAIRUH-5MONTH-HOA35"] = { tier = "5 Months", expires = 1807765200, date = "2027-04-14" }, -- 5 Months
+    ["ZAIRUH-5MONTH-W2QTW"] = { tier = "5 Months", expires = 1807765200, date = "2027-04-14" }, -- 5 Months
+    ["ZAIRUH-5MONTH-152TN"] = { tier = "5 Months", expires = 1807765200, date = "2027-04-14" }, -- 5 Months
+    ["ZAIRUH-5MONTH-LH1GM"] = { tier = "5 Months", expires = 1807765200, date = "2027-04-14" }, -- 5 Months
+    ["ZAIRUH-7MONTH-I7DMY"] = { tier = "7 Months", expires = 1812949200, date = "2027-06-13" }, -- 7 Months
+    ["ZAIRUH-7MONTH-6T498"] = { tier = "7 Months", expires = 1812949200, date = "2027-06-13" }, -- 7 Months
+    ["ZAIRUH-7MONTH-77VEF"] = { tier = "7 Months", expires = 1812949200, date = "2027-06-13" }, -- 7 Months
+    ["ZAIRUH-7MONTH-1A0YE"] = { tier = "7 Months", expires = 1812949200, date = "2027-06-13" }, -- 7 Months
+    ["ZAIRUH-7MONTH-EQ4D9"] = { tier = "7 Months", expires = 1812949200, date = "2027-06-13" }, -- 7 Months
+    ["ZAIRUH-1YEAR-8W888"] = { tier = "1 Year", expires = 1826344800, date = "2027-11-15" }, -- 1 Year
+    ["ZAIRUH-1YEAR-KALLL"] = { tier = "1 Year", expires = 1826344800, date = "2027-11-15" }, -- 1 Year
+    ["ZAIRUH-1YEAR-4DGIC"] = { tier = "1 Year", expires = 1826344800, date = "2027-11-15" }, -- 1 Year
+    ["ZAIRUH-1YEAR-FD9ED"] = { tier = "1 Year", expires = 1826344800, date = "2027-11-15" }, -- 1 Year
+    ["ZAIRUH-1YEAR-T8QQK"] = { tier = "1 Year", expires = 1826344800, date = "2027-11-15" }, -- 1 Year
+    ["ZAIRUH-LIFETIME-29VPI"] = { tier = "Lifetime", expires = 9999999999, date = "Never" }, -- Lifetime
+    ["ZAIRUH-LIFETIME-9LTK9"] = { tier = "Lifetime", expires = 9999999999, date = "Never" }, -- Lifetime
+    ["ZAIRUH-LIFETIME-BSTGW"] = { tier = "Lifetime", expires = 9999999999, date = "Never" }, -- Lifetime
+    ["ZAIRUH-LIFETIME-WLFCJ"] = { tier = "Lifetime", expires = 9999999999, date = "Never" }, -- Lifetime
+    ["ZAIRUH-LIFETIME-AQOZR"] = { tier = "Lifetime", expires = 9999999999, date = "Never" }, -- Lifetime
+}
+
+if playerGui:FindFirstChild("Zairuh_Key") then playerGui.Zairuh_Key:Destroy() end
+if playerGui:FindFirstChild("Zairuh_Loader") then playerGui.Zairuh_Loader:Destroy() end
+if playerGui:FindFirstChild("Zairuh_Spawner") then playerGui.Zairuh_Spawner:Destroy() end
+
+-- ================= KEY LOGIN UI =================
+local keyGui = Instance.new("ScreenGui")
+keyGui.Name = "Zairuh_Key"
+keyGui.ResetOnSpawn = false
+keyGui.IgnoreGuiInset = true
+keyGui.Parent = playerGui
+
+local dim = Instance.new("Frame")
+dim.Size = UDim2.new(1,0,1,0)
+dim.BackgroundColor3 = Color3.fromRGB(0,0,0)
+dim.BackgroundTransparency = 0.4
+dim.BorderSizePixel = 0
+dim.Parent = keyGui
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 380, 0, 440)
+main.Position = UDim2.new(0.5, -190, 0.5, -220)
+main.BackgroundColor3 = Color3.fromRGB(10,10,16)
+main.BorderSizePixel = 0
+main.ClipsDescendants = true
+main.Active = true
+main.Draggable = true
+main.Parent = keyGui
+local mCorner = Instance.new("UICorner"); mCorner.CornerRadius = UDim.new(0,24); mCorner.Parent = main
+local mStroke = Instance.new("UIStroke"); mStroke.Thickness = 2; mStroke.Color = Color3.fromRGB(255,215,0); mStroke.Transparency = 0.2; mStroke.Parent = main
+
+local topBar = Instance.new("Frame"); topBar.Size = UDim2.new(1,0,0,6); topBar.BorderSizePixel = 0; topBar.BackgroundColor3 = Color3.fromRGB(255,255,255); topBar.Parent = main
+local tGrad = Instance.new("UIGradient"); tGrad.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255,140,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,255,255))}; tGrad.Parent = topBar
+
+local logoFrame = Instance.new("Frame"); logoFrame.Size = UDim2.new(0,88,0,88); logoFrame.Position = UDim2.new(0.5,-44,0,32); logoFrame.BackgroundColor3 = Color3.fromRGB(20,18,5); logoFrame.BorderSizePixel = 0; logoFrame.Parent = main
+local lC = Instance.new("UICorner"); lC.CornerRadius = UDim.new(1,0); lC.Parent = logoFrame
+local lS = Instance.new("UIStroke"); lS.Thickness = 3; lS.Color = Color3.fromRGB(255,215,0); lS.Parent = logoFrame
+local logo = Instance.new("TextLabel"); logo.Size = UDim2.new(1,0,1,0); logo.BackgroundTransparency = 1; logo.Text = "🔑🐐"; logo.TextSize = 38; logo.Parent = logoFrame
+
+local title = Instance.new("TextLabel"); title.Size = UDim2.new(1,-40,0,30); title.Position = UDim2.new(0,20,0,130); title.BackgroundTransparency = 1; title.Text = "ZAIRUH THE GOAT"; title.TextColor3 = Color3.fromRGB(255,215,0); title.TextSize = 24; title.Font = Enum.Font.GothamBlack; title.Parent = main
+local sub = Instance.new("TextLabel"); sub.Size = UDim2.new(1,-40,0,18); sub.Position = UDim2.new(0,20,0,160); sub.BackgroundTransparency = 1; sub.Text = "VIP KEY LOGIN  •  PRIVATE ACCESS"; sub.TextColor3 = Color3.fromRGB(160,160,180); sub.TextSize = 11; sub.Font = Enum.Font.Gotham; sub.Parent = main
+
+local keyBoxBg = Instance.new("Frame"); keyBoxBg.Size = UDim2.new(1,-40,0,50); keyBoxBg.Position = UDim2.new(0,20,0,194); keyBoxBg.BackgroundColor3 = Color3.fromRGB(20,20,30); keyBoxBg.BorderSizePixel = 0; keyBoxBg.Parent = main
+local kC = Instance.new("UICorner"); kC.CornerRadius = UDim.new(0,12); kC.Parent = keyBoxBg
+local keyBox = Instance.new("TextBox")
+keyBox.Size = UDim2.new(1,-20,1,0); keyBox.Position = UDim2.new(0,10,0,0)
+keyBox.BackgroundTransparency = 1; keyBox.PlaceholderText = "Enter VIP Key here..."; keyBox.PlaceholderColor3 = Color3.fromRGB(120,120,140)
+keyBox.Text = ""; keyBox.TextColor3 = Color3.new(1,1,1); keyBox.TextSize = 14; keyBox.Font = Enum.Font.GothamBold; keyBox.TextXAlignment = Enum.TextXAlignment.Left; keyBox.ClearTextOnFocus = false; keyBox.Parent = keyBoxBg
+
+local statusLbl = Instance.new("TextLabel"); statusLbl.Size = UDim2.new(1,-40,0,22); statusLbl.Position = UDim2.new(0,20,0,250); statusLbl.BackgroundTransparency = 1; statusLbl.Text = "Enter your VIP key to unlock"; statusLbl.TextColor3 = Color3.fromRGB(150,150,170); statusLbl.TextSize = 11; statusLbl.Font = Enum.Font.Gotham; statusLbl.Parent = main
+
+local loginBtn = Instance.new("TextButton"); loginBtn.Size = UDim2.new(1,-40,0,52); loginBtn.Position = UDim2.new(0,20,0,280); loginBtn.BackgroundColor3 = Color3.fromRGB(255,215,0); loginBtn.Text = "🔓  UNLOCK - VIP ACCESS"; loginBtn.TextColor3 = Color3.fromRGB(0,0,0); loginBtn.TextSize = 15; loginBtn.Font = Enum.Font.GothamBlack; loginBtn.AutoButtonColor = false; loginBtn.Parent = main
+local lbC = Instance.new("UICorner"); lbC.CornerRadius = UDim.new(0,14); lbC.Parent = loginBtn
+local lbGrad = Instance.new("UIGradient"); lbGrad.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,140,0))}; lbGrad.Rotation = 90; lbGrad.Parent = loginBtn
+
+local getKeyBtn = Instance.new("TextButton"); getKeyBtn.Size = UDim2.new(1,-40,0,30); getKeyBtn.Position = UDim2.new(0,20,0,342); getKeyBtn.BackgroundTransparency = 1; getKeyBtn.Text = "Don't have a key?  Ask Zairuh for VIP"; getKeyBtn.TextColor3 = Color3.fromRGB(255,215,0); getKeyBtn.TextSize = 11; getKeyBtn.Font = Enum.Font.GothamBold; getKeyBtn.Parent = main
+getKeyBtn.MouseButton1Click:Connect(function()
+    statusLbl.Text = "DM Zairuh for a VIP key 🐐"
+    statusLbl.TextColor3 = Color3.fromRGB(255,215,0)
+    -- Put your Discord / Link here if you want: setclipboard("https://discord.gg/yourlink")
+end)
+
+local footer = Instance.new("TextLabel"); footer.Size = UDim2.new(1,-40,0,16); footer.Position = UDim2.new(0,20,0,386); footer.BackgroundTransparency = 1; footer.Text = "ZAIRUH THE GOAT  •  VIP ONLY  •  v2.0"; footer.TextColor3 = Color3.fromRGB(100,100,120); footer.TextSize = 9; footer.Font = Enum.Font.Gotham; footer.Parent = main
+local closeKey = Instance.new("TextButton"); closeKey.Size = UDim2.new(0,32,0,32); closeKey.Position = UDim2.new(1,-42,0,14); closeKey.BackgroundColor3 = Color3.fromRGB(30,30,40); closeKey.Text = "X"; closeKey.TextColor3 = Color3.new(1,1,1); closeKey.TextSize = 14; closeKey.Font = Enum.Font.GothamBold; closeKey.Parent = main
+local ckC = Instance.new("UICorner"); ckC.CornerRadius = UDim.new(1,0); ckC.Parent = closeKey
+closeKey.MouseButton1Click:Connect(function() keyGui:Destroy() end)
+
+main.Size = UDim2.new(0,380,0,0); main.Position = UDim2.new(0.5,-190,0.5,0)
+TweenService:Create(main, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0,380,0,440), Position = UDim2.new(0.5,-190,0.5,-220)}):Play()
+
+-- ================= LOADER + SPAWNER (AFTER KEY) =================
+local function OpenLoader()
+    keyGui:Destroy()
+    -- Loader UI
+    local gui = Instance.new("ScreenGui"); gui.Name = "Zairuh_Loader"; gui.ResetOnSpawn = false; gui.IgnoreGuiInset = true; gui.Parent = playerGui
+    local dim2 = Instance.new("Frame"); dim2.Size = UDim2.new(1,0,1,0); dim2.BackgroundColor3 = Color3.fromRGB(0,0,0); dim2.BackgroundTransparency = 0.35; dim2.BorderSizePixel = 0; dim2.Parent = gui
+    local lMain = Instance.new("Frame"); lMain.Size = UDim2.new(0,400,0,500); lMain.Position = UDim2.new(0.5,-200,0.5,-250); lMain.BackgroundColor3 = Color3.fromRGB(10,10,16); lMain.BorderSizePixel = 0; lMain.ClipsDescendants = true; lMain.Active = true; lMain.Draggable = true; lMain.Parent = gui
+    local lc = Instance.new("UICorner"); lc.CornerRadius = UDim.new(0,24); lc.Parent = lMain
+    local ls = Instance.new("UIStroke"); ls.Thickness = 2; ls.Color = Color3.fromRGB(255,215,0); ls.Parent = lMain
+    local tb = Instance.new("Frame"); tb.Size = UDim2.new(1,0,0,6); tb.BorderSizePixel = 0; tb.BackgroundColor3 = Color3.fromRGB(255,255,255); tb.Parent = lMain
+    local tg = Instance.new("UIGradient"); tg.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255,140,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,255,255))}; tg.Parent = tb
+    local lf = Instance.new("Frame"); lf.Size = UDim2.new(0,96,0,96); lf.Position = UDim2.new(0.5,-48,0,36); lf.BackgroundColor3 = Color3.fromRGB(20,18,5); lf.BorderSizePixel = 0; lf.Parent = lMain
+    local lfc = Instance.new("UICorner"); lfc.CornerRadius = UDim.new(1,0); lfc.Parent = lf
+    local lfs = Instance.new("UIStroke"); lfs.Thickness = 3; lfs.Color = Color3.fromRGB(255,215,0); lfs.Parent = lf
+    local ll = Instance.new("TextLabel"); ll.Size = UDim2.new(1,0,1,0); ll.BackgroundTransparency = 1; ll.Text = "🐐"; ll.TextSize = 48; ll.Parent = lf
+    local lt = Instance.new("TextLabel"); lt.Size = UDim2.new(1,-40,0,32); lt.Position = UDim2.new(0,20,0,142); lt.BackgroundTransparency = 1; lt.Text = "ZAIRUH"; lt.TextColor3 = Color3.fromRGB(255,215,0); lt.TextSize = 32; lt.Font = Enum.Font.GothamBlack; lt.Parent = lMain
+    local lt2 = Instance.new("TextLabel"); lt2.Size = UDim2.new(1,-40,0,22); lt2.Position = UDim2.new(0,20,0,172); lt2.BackgroundTransparency = 1; lt2.Text = "THE GOAT  •  VIP UNLOCKED ✅"; lt2.TextColor3 = Color3.new(1,1,1); lt2.TextSize = 14; lt2.Font = Enum.Font.GothamBlack; lt2.Parent = lMain
+    local lsub = Instance.new("TextLabel"); lsub.Size = UDim2.new(1,-40,0,20); lsub.Position = UDim2.new(0,20,0,196); lsub.BackgroundTransparency = 1; lsub.Text = "Toilet Tower Defense  •  v3 FIXED SPAWNER"; lsub.TextColor3 = Color3.fromRGB(160,160,180); lsub.TextSize = 11; lsub.Font = Enum.Font.Gotham; lsub.Parent = lMain
+    local pill = Instance.new("Frame"); pill.Size = UDim2.new(0,190,0,26); pill.Position = UDim2.new(0.5,-95,0,224); pill.BackgroundColor3 = Color3.fromRGB(20,80,40); pill.BorderSizePixel = 0; pill.Parent = lMain
+    local pc = Instance.new("UICorner"); pc.CornerRadius = UDim.new(1,0); pc.Parent = pill
+    local pl = Instance.new("TextLabel"); pl.Size = UDim2.new(1,0,1,0); pl.BackgroundTransparency = 1; pl.Text = "●  VIP STATUS: ACTIVE"; pl.TextColor3 = Color3.fromRGB(80,255,140); pl.TextSize = 10; pl.Font = Enum.Font.GothamBold; pl.Parent = pill
+    local feats = {{"🐐","Capture Spawner - No 267 Kick"},{"👑","Auto Spawn - Titans / Cheap / Random"},{"🛡️","Safe Mode - Anti-Ban Delay"},{"🔥","Zairuh The Goat - Premium UI"}}
+    for i,f in ipairs(feats) do
+        local row = Instance.new("Frame"); row.Size = UDim2.new(1,-40,0,26); row.Position = UDim2.new(0,20,0,258+(i-1)*28); row.BackgroundColor3 = Color3.fromRGB(20,20,30); row.BorderSizePixel = 0; row.Parent = lMain
+        local rc = Instance.new("UICorner"); rc.CornerRadius = UDim.new(0,10); rc.Parent = row
+        local ic = Instance.new("TextLabel"); ic.Size = UDim2.new(0,26,0,26); ic.BackgroundTransparency = 1; ic.Text = f[1]; ic.TextSize = 13; ic.Parent = row
+        local tx = Instance.new("TextLabel"); tx.Size = UDim2.new(1,-32,1,0); tx.Position = UDim2.new(0,28,0,0); tx.BackgroundTransparency = 1; tx.Text = f[2]; tx.TextColor3 = Color3.fromRGB(220,220,235); tx.TextSize = 12; tx.Font = Enum.Font.Gotham; tx.TextXAlignment = Enum.TextXAlignment.Left; tx.Parent = row
+    end
+    local barBG = Instance.new("Frame"); barBG.Size = UDim2.new(1,-40,0,10); barBG.Position = UDim2.new(0,20,0,382); barBG.BackgroundColor3 = Color3.fromRGB(30,30,45); barBG.BorderSizePixel = 0; barBG.Parent = lMain
+    local bc = Instance.new("UICorner"); bc.CornerRadius = UDim.new(1,0); bc.Parent = barBG
+    local barFill = Instance.new("Frame"); barFill.Size = UDim2.new(0,0,1,0); barFill.BackgroundColor3 = Color3.fromRGB(255,255,255); barFill.BorderSizePixel = 0; barFill.Parent = barBG
+    local fc = Instance.new("UICorner"); fc.CornerRadius = UDim.new(1,0); fc.Parent = barFill
+    local bg = Instance.new("UIGradient"); bg.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255,140,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,255,255))}; bg.Parent = barFill
+    local pct = Instance.new("TextLabel"); pct.Size = UDim2.new(1,-40,0,16); pct.Position = UDim2.new(0,20,0,396); pct.BackgroundTransparency = 1; pct.Text = "VIP Verified, Goat..."; pct.TextColor3 = Color3.fromRGB(150,150,170); pct.TextSize = 10; pct.Font = Enum.Font.Gotham; pct.TextXAlignment = Enum.TextXAlignment.Left; pct.Parent = lMain
+    local loadBtn = Instance.new("TextButton"); loadBtn.Size = UDim2.new(1,-40,0,52); loadBtn.Position = UDim2.new(0,20,0,420); loadBtn.BackgroundColor3 = Color3.fromRGB(255,215,0); loadBtn.Text = "🐐  LOAD - ZAIRUH THE GOAT"; loadBtn.TextColor3 = Color3.fromRGB(0,0,0); loadBtn.TextSize = 15; loadBtn.Font = Enum.Font.GothamBlack; loadBtn.AutoButtonColor = false; loadBtn.Parent = lMain
+    local lcb = Instance.new("UICorner"); lcb.CornerRadius = UDim.new(0,14); lcb.Parent = loadBtn
+    local lg = Instance.new("UIGradient"); lg.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255,215,0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255,140,0))}; lg.Rotation = 90; lg.Parent = loadBtn
+    local foot = Instance.new("TextLabel"); foot.Size = UDim2.new(1,-40,0,16); foot.Position = UDim2.new(0,20,0,480); foot.BackgroundTransparency = 1; foot.Text = "ZAIRUH THE GOAT  •  VIP  •  v2.0  •  🐐"; foot.TextColor3 = Color3.fromRGB(100,100,120); foot.TextSize = 9; foot.Font = Enum.Font.Gotham; foot.Parent = lMain
+    lMain.Size = UDim2.new(0,400,0,0); lMain.Position = UDim2.new(0.5,-200,0.5,0)
+    TweenService:Create(lMain, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0,400,0,500), Position = UDim2.new(0.5,-200,0.5,-250)}):Play()
+
+    local function OpenSpawner()
+        local unpack = table.unpack or unpack
+        local UNITS = {"TitanClockman","TitanDrillman","TitanSpeakerman","UpgradedCinemaman","Gmanv3","Gmanv2","Gmanv1","GmanBlaster","GmanBuzzsaw","GmanPlane","LargeScientist","Scientist","JetpackPolice","Police","Clockman","RocketLauncher","SecretAgent","Large","Helicopter","TNT","Mutant","Glitch","Jetpack","Spider","Hook","Vacuum","Ufo","Rocket","Triple","Buzzsaw","Katana","GunStrider","Snowman","Turkey","SantaTvman"}
+        local TITANS = {"TitanClockman","TitanDrillman","TitanSpeakerman","UpgradedCinemaman","Gmanv3","GmanBlaster"}
+        local CHEAP = {"Police","Scientist","Clockman","Jetpack","Large"
